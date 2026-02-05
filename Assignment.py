@@ -113,3 +113,9 @@ def update_image(self):
     self.canvas.config(width=img.width(), height=img.height())
     self.canvas.create_image(0, 0, anchor="nw", image=img)
     self.canvas.image = img
+menubar = tk.Menu(self.root)
+file_menu = tk.Menu(menubar, tearoff=0)
+file_menu.add_command(label="Open", command=self.open_image)
+file_menu.add_command(label="Save", command=self.save_image)
+menubar.add_cascade(label="File", menu=file_menu)
+self.root.config(menu=menubar)
