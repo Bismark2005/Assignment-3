@@ -36,3 +36,20 @@ def load_image(self, path):
     self.history.clear()
     self.redo_stack.clear()
     return img
+def push_history(self):
+    if self.image is None:
+        return
+    self.history.append(self.image.copy())
+    self.redo_stack.clear()
+    if len(self.history) > self.max_history:
+        self.history.pop(0)
+
+def undo(self):
+    if self.history:
+        self.redo_stack.append(self.image.copy())
+        self.image = self.history.pop()
+
+def redo(self):
+    if self.redo_stack:
+        self.history.append(self.image.copy())
+        self.image = self.redo_stack.pop()
