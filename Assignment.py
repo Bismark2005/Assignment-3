@@ -80,3 +80,17 @@ def flip(self, mode):
         self.image = cv2.flip(self.image, 1)
     elif mode == "v":
         self.image = cv2.flip(self.image, 0)
+def apply_adjustments(self):
+    img = cv2.convertScaleAbs(
+        self.image,
+        alpha=self.adjust_contrast,
+        beta=self.adjust_brightness
+    )
+
+    if self.adjust_saturation != 1.0:
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV).astype(np.float32)
+        hsv[:, :, 1] *= self.adjust_saturation
+        hsv[:, :, 1] = np.clip(hsv[:, :, 1], 0, 255)
+        img = cv2.cvtColor(hsv.astype(np.uint8), cv2.COLOR_HSV2BGR)
+
+    self.image = img
