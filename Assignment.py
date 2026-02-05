@@ -67,3 +67,16 @@ def edge_detection(self):
 def sharpen(self):
     kernel = np.array([[0,-1,0],[-1,5,-1],[0,-1,0]])
     self.image = cv2.filter2D(self.image, -1, kernel)
+def rotate(self, angle):
+    if angle == 90:
+        self.image = cv2.rotate(self.image, cv2.ROTATE_90_CLOCKWISE)
+    elif angle == 180:
+        self.image = cv2.rotate(self.image, cv2.ROTATE_180)
+    elif angle == 270:
+        self.image = cv2.rotate(self.image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+
+def flip(self, mode):
+    if mode == "h":
+        self.image = cv2.flip(self.image, 1)
+    elif mode == "v":
+        self.image = cv2.flip(self.image, 0)
