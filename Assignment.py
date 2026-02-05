@@ -53,3 +53,17 @@ def redo(self):
     if self.redo_stack:
         self.history.append(self.image.copy())
         self.image = self.redo_stack.pop()
+def grayscale(self):
+    self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+    self.image = cv2.cvtColor(self.image, cv2.COLOR_GRAY2BGR)
+
+def blur(self):
+    self.image = cv2.GaussianBlur(self.image, (7, 7), 0)
+
+def edge_detection(self):
+    edges = cv2.Canny(self.image, 100, 200)
+    self.image = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
+
+def sharpen(self):
+    kernel = np.array([[0,-1,0],[-1,5,-1],[0,-1,0]])
+    self.image = cv2.filter2D(self.image, -1, kernel)
