@@ -102,3 +102,14 @@ class ImageEditorApp:
 
         self.processor = ImageProcessor()
         self.file_path = None
+def update_image(self):
+    if self.processor.image is None:
+        return
+
+    img = cv2.cvtColor(self.processor.image, cv2.COLOR_BGR2RGB)
+    img = Image.fromarray(img)
+    img = ImageTk.PhotoImage(img)
+
+    self.canvas.config(width=img.width(), height=img.height())
+    self.canvas.create_image(0, 0, anchor="nw", image=img)
+    self.canvas.image = img
