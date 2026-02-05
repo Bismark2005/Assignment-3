@@ -120,3 +120,22 @@ file_menu.add_command(label="Open", command=self.open_image)
 file_menu.add_command(label="Save", command=self.save_image)
 menubar.add_cascade(label="File", menu=file_menu)
 self.root.config(menu=menubar)
+
+def crop(self, x, y, w, h):
+    h_img, w_img, _ = self.image.shape
+    x = max(0, min(x, w_img - 1))
+    y = max(0, min(y, h_img - 1))
+    self.image = self.image[y:y+h, x:x+w]
+
+def adjust_zoom(self, value):
+    self.display_zoom = float(value) / 100
+    self.update_image()
+
+self.root.configure(bg="#f5f2ff")
+tk.Label(text="Pro Image Editor", font=("Segoe UI", 20, "bold"))
+
+def reset(self):
+    self.image = self.original.copy()
+    self.history.clear()
+    self.redo_stack.clear()
+
