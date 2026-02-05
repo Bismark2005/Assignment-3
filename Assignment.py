@@ -22,3 +22,17 @@ class ImageProcessor:
         self.adjust_brightness = 0
         self.adjust_contrast = 1.0
         self.adjust_saturation = 1.0
+def load_image(self, path):
+    img = cv2.imread(path)
+    if img is None:
+        try:
+            pil = Image.open(path).convert("RGB")
+            img = cv2.cvtColor(np.array(pil), cv2.COLOR_RGB2BGR)
+        except Exception:
+            return None
+
+    self.image = img
+    self.original = img.copy()
+    self.history.clear()
+    self.redo_stack.clear()
+    return img
