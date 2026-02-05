@@ -94,3 +94,11 @@ def apply_adjustments(self):
         img = cv2.cvtColor(hsv.astype(np.uint8), cv2.COLOR_HSV2BGR)
 
     self.image = img
+class ImageEditorApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Pro Image Editor")
+        self.root.minsize(1000, 650)
+
+        self.processor = ImageProcessor()
+        self.file_path = None
